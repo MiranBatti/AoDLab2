@@ -2,16 +2,31 @@ package se.hig.aod.lab2;
 
 public class LinkedList<T> implements List<T> {
 
+	private ListNode<T> head;
+	private int size;
+	
+	public LinkedList() {
+		this.head = null;
+	}
+	/**
+	 * Kollar om listan är tom.
+	 * @return boolean
+	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(head == null)
+			return true;
 		return false;
 	}
-
+	/**
+	 * Tömmer listan
+	 */
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		//medan listan inte är tom: ta bort första elementet.
+		while(!isEmpty()) {
+			removeFirst();
+		}
 	}
 
 	@Override
@@ -80,4 +95,14 @@ public class LinkedList<T> implements List<T> {
 		
 	}
 
+	static class ListNode<T> {
+		T element;
+		ListNode next;
+		
+		public ListNode(T data, ListNode next) {
+			this.element = data;
+			this.next = next;
+		}
+	}
+	
 }
