@@ -1,6 +1,5 @@
 package se.hig.aod.lab2;
 
-import javax.swing.ListSelectionModel;
 
 public class LinkedList<T> implements List<T> {
 
@@ -8,7 +7,6 @@ public class LinkedList<T> implements List<T> {
 //	private int size;
 	
 	public LinkedList() {
-		this.head = null;
 	}
 	/**
 	 * Kollar om listan är tom.
@@ -41,7 +39,7 @@ public class LinkedList<T> implements List<T> {
 		// efter storleken ökas kollar vi i nästa nod.
 		while(current != null) {
 			size++;
-			current = head.next;
+			current = current.next;
 		}	
 		return size;
 	}
@@ -50,11 +48,12 @@ public class LinkedList<T> implements List<T> {
 	 */
 	@Override
 	public void insertFirst(T t) {
+		ListNode<T> tmp;
 		if(isEmpty()) {
-			ListNode<T> tmp = new ListNode<T>(t, null);
+			tmp = new ListNode<T>(t, null);
 			head = tmp;
 		} else {
-			ListNode<T> tmp = new ListNode<T>(t, head);
+			tmp = new ListNode<T>(t, head);
 			head = tmp;
 		}
 	}
@@ -63,10 +62,26 @@ public class LinkedList<T> implements List<T> {
 	 */
 	@Override
 	public void insertLast(T t) {
-		while(head.next != null) 
-			head = head.next;
+		ListNode<T> last = new ListNode<T>(t, null);
+		ListNode<T> first = head;
+		
+		if(isEmpty()) {
+			head = last;
+		} else {
+			while(first.next != null) 
+				first = first.next;
+			first.next = last;
+		}
+		/*
+		ListNode<T> current = head;
+		if(isEmpty()) {
+			ListNode<T> tmp = new ListNode<T>(t, null);
+			head.next = tmp;
+		}
+		while(current != null) 
+			current = current.next;
 		ListNode<T> tmp = new ListNode<T>(t, null);
-		head.next = tmp;
+		head.next = tmp;*/
 	}
 	/**
 	 * Ta bort det första elementet i listan.
@@ -121,36 +136,53 @@ public class LinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public boolean contains(T t) {
-		ListNode<T> tmp = head;
-		if(getFirst().equals(t))
+	public boolean contains(T t) throws ListIsEmptyException{
+		ListNode<T> current = head;
+		if(!isEmpty() && getFirst().equals(t))
 			return true;
 		else
-			while(head.next != null) {
-				tmp = head;
-				head = head.next;
-				if(tmp.equals(t))
+			while(current != null) {
+				current = head.next;
+				if(current.element.equals(t))
 					return true;
+				else
+					return false;
 			}
 		return false;
 	}
 
 	@Override
 	public void printList() {
-		// TODO Auto-generated method stub
-		
+		ListNode<T> current = head;
+		while(current != null) {
+			System.out.println(current.element);	
+			current = current.next;
+		}
+		/*
+		if(!isEmpty()) {
+			System.out.println(head.element);
+			while(head.next != null) {
+				System.out.println(head.element);
+				head = head.next;
+			}
+		}*/
 	}
 
 	@Override
 	public void printListR() {
-		// TODO Auto-generated method stub
-		
+			if(head == null) return;
+			else {
+				while(head != null) {
+					System.out.println(head.element);
+					head = head.next;
+					printListR();
+				}
+			}
 	}
 
 	@Override
 	public void reversePrintList() {
-		// TODO Auto-generated method stub
-		
+		head.printR(head);
 	}
 
 	static class ListNode<T> {
@@ -160,6 +192,30 @@ public class LinkedList<T> implements List<T> {
 		public ListNode(T element, ListNode<T> next) {
 			this.element = element;
 			this.next = next;
+		}
+
+		public T getElement() {
+			return element;
+		}
+
+		public void setElement(T element) {
+			this.element = element;
+		}
+
+		public ListNode<T> getNext() {
+			return next;
+		}
+
+		public void setNext(ListNode<T> next) {
+			this.next = next;
+		}
+		
+		public void printR(ListNode<T> node) {
+			if(node == null)
+				return;
+			else
+				printR(node.next);
+			System.out.println(node.element);	
 		}
 	}
 	

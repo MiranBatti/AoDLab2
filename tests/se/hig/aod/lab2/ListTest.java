@@ -18,26 +18,41 @@ public class ListTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	/**
+	 * Testar om listan är tom.
+	 */
 	@Test
 	public void isEmptyTest() {
 		assertTrue(testList.isEmpty());
 	}
-	
+	/**
+	 * Testar listans storlek då den är tom.
+	 */
 	@Test
-	public void nbrOfElementsOnEmpty() {
+	public void nbrOfElementsOnEmptyTest() {
 		assertEquals(0, testList.numberOfElements());
 	}
-	
+	/**
+	 * Testar listans storlek då den inte är tom.
+	 */
 	@Test
-	public void nbrOfElementsOnNotEmpty() {
+	public void nbrOfElementsNotEmptyTest() {
 		testList.insertFirst(5);
 		assertEquals(1, testList.numberOfElements());
 	}
-	
+	/**
+	 * Testar om listan innehåller ett element som sökes efter.
+	 */
 	@Test
 	public void containsElementTest() {
 		testList.insertFirst(3);
 		assertTrue(testList.contains(3));
+	}
+	/**
+	 * Testar om listan inte innehåller ett element som sökes efter.
+	 */
+	@Test
+	public void doesNotContainElementTest() {
+		assertFalse(testList.contains(7));
 	}
 }
