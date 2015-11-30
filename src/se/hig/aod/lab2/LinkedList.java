@@ -3,7 +3,7 @@ package se.hig.aod.lab2;
 public class LinkedList<T> implements List<T> {
 
 	private ListNode<T> head;
-	private int size;
+//	private int size;
 	
 	public LinkedList() {
 		this.head = null;
@@ -23,7 +23,7 @@ public class LinkedList<T> implements List<T> {
 	 */
 	@Override
 	public void clear() {
-		//medan listan inte är tom: ta bort första elementet.
+		//medan listan inte är tom; ta bort första elementet.
 		while(!isEmpty()) {
 			removeFirst();
 		}
@@ -31,20 +31,43 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public int numberOfElements() {
-		// TODO Auto-generated method stub
-		return 0;
+		head = head.next;
+		int size = 0;
+		
+		while(head.next != null) {
+			size++;
+			head = head.next;
+		}
+		/*
+		// Om listan är tom fångas ett fel med trycatch. Returnerar sedan 0.
+		try {
+			for (ListNode<T> n = head; n.next != null; n = n.next) {
+				size++;
+			}
+		} catch (NullPointerException e) {
+			System.out.println("List is empty.");
+		}*/
+		
+		return size;
 	}
 
 	@Override
 	public void insertFirst(T t) {
-		// TODO Auto-generated method stub
-		
+		if(isEmpty()) {
+			ListNode<T> tmp = new ListNode<T>(t, null);
+			head = tmp;
+		} else {
+			ListNode<T> tmp = new ListNode<T>(t, head);
+			head = tmp;
+		}
 	}
 
 	@Override
 	public void insertLast(T t) {
-		// TODO Auto-generated method stub
-		
+		while(head.next != null) 
+			head = head.next;
+		ListNode<T> tmp = new ListNode<T>(t, null);
+		head = tmp;
 	}
 
 	@Override
@@ -97,10 +120,10 @@ public class LinkedList<T> implements List<T> {
 
 	static class ListNode<T> {
 		T element;
-		ListNode next;
+		ListNode<T> next;
 		
-		public ListNode(T data, ListNode next) {
-			this.element = data;
+		public ListNode(T element, ListNode<T> next) {
+			this.element = element;
 			this.next = next;
 		}
 	}
