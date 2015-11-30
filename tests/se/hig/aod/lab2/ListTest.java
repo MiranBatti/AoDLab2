@@ -35,4 +35,9 @@ public class ListTest {
 		assertEquals(1, testList.numberOfElements());
 	}
 	
+	@Test
+	public void containsElementTest() {
+		testList.insertFirst(3);
+		assertTrue(testList.contains(3));
+	}
 }

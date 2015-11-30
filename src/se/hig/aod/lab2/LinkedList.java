@@ -1,5 +1,7 @@
 package se.hig.aod.lab2;
 
+import javax.swing.ListSelectionModel;
+
 public class LinkedList<T> implements List<T> {
 
 	private ListNode<T> head;
@@ -28,29 +30,24 @@ public class LinkedList<T> implements List<T> {
 			removeFirst();
 		}
 	}
-
+	/**
+	 * Returnerar antal element i listan.
+	 */
 	@Override
 	public int numberOfElements() {
-		head = head.next;
+		ListNode<T> current = head;
 		int size = 0;
-		
-		while(head.next != null) {
+		// så länge nuvarande nod inte är tom ökas size.
+		// efter storleken ökas kollar vi i nästa nod.
+		while(current != null) {
 			size++;
-			head = head.next;
-		}
-		/*
-		// Om listan är tom fångas ett fel med trycatch. Returnerar sedan 0.
-		try {
-			for (ListNode<T> n = head; n.next != null; n = n.next) {
-				size++;
-			}
-		} catch (NullPointerException e) {
-			System.out.println("List is empty.");
-		}*/
-		
+			current = head.next;
+		}	
 		return size;
 	}
-
+	/**
+	 * Lägg element först i listan.
+	 */
 	@Override
 	public void insertFirst(T t) {
 		if(isEmpty()) {
@@ -61,42 +58,80 @@ public class LinkedList<T> implements List<T> {
 			head = tmp;
 		}
 	}
-
+	/**
+	 * Lägg element sist i listan.
+	 */
 	@Override
 	public void insertLast(T t) {
 		while(head.next != null) 
 			head = head.next;
 		ListNode<T> tmp = new ListNode<T>(t, null);
-		head = tmp;
+		head.next = tmp;
 	}
-
+	/**
+	 * Ta bort det första elementet i listan.
+	 */
 	@Override
 	public T removeFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		ListNode<T> tmp;
+		if(!isEmpty()) {
+			tmp = head;
+			head.element = null;
+			head = tmp.next;
+		}
+		return head.element; // behöver felhantering. returnerar sista elementet i listan.
 	}
 
 	@Override
 	public T removeLast() {
-		// TODO Auto-generated method stub
+		if(isEmpty()) {
+			System.err.println("Nothing to remove; list is empty.");
+			return null;
+		} else if(numberOfElements() == 1)
+			removeFirst();
+		else { // traverserar listan till den sista noden.
+			while(head.next != null)
+				head = head.next;
+			ListNode<T> tmp = head; // för att returnera sista elementet.
+			head = null;
+			return tmp.element;
+		}
 		return null;
 	}
 
 	@Override
 	public T getFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		if(!isEmpty())
+			return head.element;
+		else
+			return null;
 	}
 
 	@Override
 	public T getLast() {
-		// TODO Auto-generated method stub
-		return null;
+		ListNode<T> tmp = head;
+		// behöver kanske felhantering för tom lista.
+		if(!isEmpty()) {
+			while(head.next != null) {
+				head = head.next;			
+				tmp = head;
+			}
+		} else return null;
+		return tmp.element;
 	}
 
 	@Override
 	public boolean contains(T t) {
-		// TODO Auto-generated method stub
+		ListNode<T> tmp = head;
+		if(getFirst().equals(t))
+			return true;
+		else
+			while(head.next != null) {
+				tmp = head;
+				head = head.next;
+				if(tmp.equals(t))
+					return true;
+			}
 		return false;
 	}
 
