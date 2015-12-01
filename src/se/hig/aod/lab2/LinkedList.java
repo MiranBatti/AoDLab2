@@ -1,6 +1,5 @@
 package se.hig.aod.lab2;
 
-import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements List<T> {
 
@@ -90,8 +89,8 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public T removeLast() throws ListIsEmptyException{
-		ListNode<T> last;
-		ListNode<T> first = head;
+		ListNode<T> last = null;;
+		ListNode<T> current = head;
 		
 		if(isEmpty()) {
 			throw new ListIsEmptyException("List is empty.");
@@ -99,24 +98,13 @@ public class LinkedList<T> implements List<T> {
 		if(head.next == null)
 			head = null;
 		else {
-			while(first.next != null) 
-				first = first.next;
-			first = null;
-		}
-		/*
-		ListNode<T> current = head;
-		if(isEmpty()) {
-			System.err.println("Nothing to remove; list is empty.");
-			return null;
-		} else if(numberOfElements() == 1)
-			removeFirst();
-		else { // traverserar listan till den sista noden.
-			while(current.next != null)
+			while(current.next != null) {
+				last = current;
 				current = current.next;
-			ListNode<T> tmp = current; // för att returnera sista elementet.
-			current.element = null;
-			return tmp.element;
-		}*/
+			}
+			last.next = null;
+			current = null;
+		}
 		return null;
 	}
 
@@ -129,21 +117,22 @@ public class LinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public T getLast() {
+	public T getLast() throws ListIsEmptyException{
 		ListNode<T> tmp = head;
 		// behöver kanske felhantering för tom lista.
 		if(!isEmpty()) {
-			while(head.next != null) {
-				head = head.next;			
-				tmp = head;
+			while(tmp.next != null) {
+				tmp = tmp.next;			
 			}
-		} else return null;
+		} else throw new ListIsEmptyException("List is empty.");
 		return tmp.element;
 	}
 
 	@Override
 	public boolean contains(T t) throws ListIsEmptyException{
 		ListNode<T> current = head;
+		if(isEmpty())
+			throw new ListIsEmptyException("List is empty.");
 		if(!isEmpty() && getFirst().equals(t))
 			return true;
 		else
@@ -164,14 +153,6 @@ public class LinkedList<T> implements List<T> {
 			System.out.println(current.element);	
 			current = current.next;
 		}
-		/*
-		if(!isEmpty()) {
-			System.out.println(head.element);
-			while(head.next != null) {
-				System.out.println(head.element);
-				head = head.next;
-			}
-		}*/
 	}
 
 	@Override

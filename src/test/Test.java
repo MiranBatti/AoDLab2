@@ -13,6 +13,7 @@ public class Test {
 		boolean tmp = testList.contains(1);
 		System.out.println(tmp);
 		System.out.println(testList.numberOfElements() + " : size");
+		System.out.println(testList.getLast() + " last");
 		testList.removeFirst();
 		testList.removeLast();
 		testList.printList();
