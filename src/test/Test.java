@@ -20,7 +20,9 @@ public class Test {
 	     list.removeLast();
 	     list.printList();
 	     
-	     jav
+	     // för att jämföra beteendet mellan våran lista och javas lista.
+	     java.util.LinkedList<Integer> z = new java.util.LinkedList<>();
+	     z.clear();
 	      /*
 		List<Integer> testList = new LinkedList<Integer>();
 		System.out.println(testList.numberOfElements());
