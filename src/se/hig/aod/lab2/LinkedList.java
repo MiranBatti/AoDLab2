@@ -106,11 +106,11 @@ public class LinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public T getFirst() {
+	public T getFirst() throws ListIsEmptyException{
 		if(!isEmpty())
 			return head.element;
 		else
-			return null;
+			throw new ListIsEmptyException("List is empty.");
 	}
 
 	@Override

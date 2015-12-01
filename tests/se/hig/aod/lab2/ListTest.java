@@ -60,6 +60,13 @@ public class ListTest {
 			assertNotNull("Expected: ListIsEmptyException!");
 		}
 	}
-	
-	
+	/**
+	 * Sätt in ett element i listan och sedan en till som kommer vara först i listan.
+	 */
+	@Test
+	public void insertFirstAndReplaceTest() {
+		testList.insertFirst(2);
+		testList.insertFirst(1);
+		assertEquals(1, testList.getFirst().intValue());
+	}
 }

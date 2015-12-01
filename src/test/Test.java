@@ -19,6 +19,8 @@ public class Test {
 
 	     list.removeLast();
 	     list.printList();
+	     
+	     jav
 	      /*
 		List<Integer> testList = new LinkedList<Integer>();
 		System.out.println(testList.numberOfElements());
