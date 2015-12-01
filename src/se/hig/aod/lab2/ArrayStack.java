@@ -20,24 +20,22 @@ public class ArrayStack<V> implements Stack<V> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return top == -1;
 	}
 
 	@Override
 	public void push(V v) {
-		top++;
 		elements[top] = v;
+		top++;		
 	}
 
 	@Override
 	public V pop() throws StackEmptyException{
 		if(top == -1)
 			throw new StackEmptyException("Can't remove from empty stack.");
-		V tmp = elements[top];
-		elements[top] = null;
+//		elements[top] = null;
 		top--;
-		return tmp;
+		return elements[top];
 	}
 
 	@Override
@@ -47,8 +45,11 @@ public class ArrayStack<V> implements Stack<V> {
 		return elements[top];
 	}
 	
+	public int size() {
+		return top + 1;
+	}
+	
 	public boolean isFull() {
-		// TODO a real fucking implementation
-		return false;
+		return size() == elements.length;
 	}
 }
