@@ -12,54 +12,73 @@ public class ArrayQueue<V> implements Queue<V> {
 		elements = (V[]) new Object[capacity];
 		front = 0;
 		back = 0;
+		size = 0;
 		this.capacity = capacity;
 	}
 
 	@Override
 	public void clear() {
 		elements = null;
+		System.out.println("Listan har tömts.");
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return back == front ? true : false; // Om slutet av kön är lika stor som början så är den tom.
+		/*
+		boolean tmp = false;
+		for (int i = 0; i < elements.length; i++) {
+			if(elements[i] == null)
+				tmp = false;
+			else
+				tmp = true;
+		}*/
+		return size == 0;
+//		return (back == front) ? true : false; // Om slutet av kön är lika stor som början så är den tom.
 	}
 
 	@Override
-	public void enqueue(V v) {
+	public void enqueue(V v) throws QueueFullException{
 		if(isFull()) {
-			return; // behöver felhantering
-		}
+			throw new QueueFullException("Queue is full!");
+			}
 		elements[back] = v;
-		back += 1 % capacity;
+		back = (back + 1) % capacity;
 		size++;
 	}
 
 	@Override
-	public V dequeue() {
+	public V dequeue() throws QueueEmptyException{
 		V tmp;
 		if(isEmpty())
-			return null; // behöver felhantering
+			throw new QueueEmptyException("Queue is empty");
 		tmp = elements[front];
 		elements[front] = null;
-		front += 1 % capacity;
+		front = (front + 1) % capacity;
 		size--;
 		return tmp;
 	}
 
 	@Override
-	public V getFront() {
+	public V getFront() throws QueueEmptyException{
+		if(isEmpty())
+			throw new QueueEmptyException("List is empty.");
 		return elements[front];
 	}
 
 	public boolean isFull() {
+		/*
 		int difference = back - front;// ex: 9 - 10 
-		if(difference == -1)
+		if(difference == -1 || difference == (capacity - 1))
 			return true;
-		return false;
+		return false;*/
+		return(this.size == this.capacity);		
 	}
 	
 	public int size() {
+		/*
+		if(back > front)
+            return back - front;
+        return capacity - front + back;*/
 		return size;
 	}
 }

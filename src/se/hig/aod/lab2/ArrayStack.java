@@ -20,6 +20,7 @@ public class ArrayStack<V> implements Stack<V> {
 			if(top != -1)
 				top--;
 		}
+		System.out.println("Listan har tömts.");
 	}
 
 	@Override
