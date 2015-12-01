@@ -1,5 +1,6 @@
 package se.hig.aod.lab2;
 
+import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements List<T> {
 
@@ -72,16 +73,6 @@ public class LinkedList<T> implements List<T> {
 				first = first.next;
 			first.next = last;
 		}
-		/*
-		ListNode<T> current = head;
-		if(isEmpty()) {
-			ListNode<T> tmp = new ListNode<T>(t, null);
-			head.next = tmp;
-		}
-		while(current != null) 
-			current = current.next;
-		ListNode<T> tmp = new ListNode<T>(t, null);
-		head.next = tmp;*/
 	}
 	/**
 	 * Ta bort det första elementet i listan.
@@ -98,19 +89,34 @@ public class LinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public T removeLast() {
+	public T removeLast() throws ListIsEmptyException{
+		ListNode<T> last;
+		ListNode<T> first = head;
+		
+		if(isEmpty()) {
+			throw new ListIsEmptyException("List is empty.");
+		} 
+		if(head.next == null)
+			head = null;
+		else {
+			while(first.next != null) 
+				first = first.next;
+			first = null;
+		}
+		/*
+		ListNode<T> current = head;
 		if(isEmpty()) {
 			System.err.println("Nothing to remove; list is empty.");
 			return null;
 		} else if(numberOfElements() == 1)
 			removeFirst();
 		else { // traverserar listan till den sista noden.
-			while(head.next != null)
-				head = head.next;
-			ListNode<T> tmp = head; // för att returnera sista elementet.
-			head = null;
+			while(current.next != null)
+				current = current.next;
+			ListNode<T> tmp = current; // för att returnera sista elementet.
+			current.element = null;
 			return tmp.element;
-		}
+		}*/
 		return null;
 	}
 
@@ -182,6 +188,7 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public void reversePrintList() {
+		if(head == null) return;
 		head.printR(head);
 	}
 

@@ -1,8 +1,13 @@
 package se.hig.aod.lab2;
 
-public class ArrayStack implements Stack {
+public class ArrayStack<V> implements Stack<V> {
 	
-	int arrayS[] = new int[10];
+	private V[] elements;
+	private final int size = 10;
+	
+	public ArrayStack() {
+		elements = (V[]) new Object[size];
+	}
 
 	@Override
 	public void clear() {
@@ -17,19 +22,18 @@ public class ArrayStack implements Stack {
 	}
 
 	@Override
-	public void push(Object v) {
+	public void push(V v) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public Object pop() {
+	public V pop() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object top() {
+	public V top() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -13,13 +13,10 @@ public class Test {
 		boolean tmp = testList.contains(1);
 		System.out.println(tmp);
 		System.out.println(testList.numberOfElements() + " : size");
+		testList.removeFirst();
+		testList.removeLast();
 		testList.printList();
 		testList.reversePrintList();
-		
-		List<String> s = new LinkedList<String>();
-		s.insertFirst("test");
-		System.out.println(s.contains("test"));
-		s.printList();
 		
 	}
 }
