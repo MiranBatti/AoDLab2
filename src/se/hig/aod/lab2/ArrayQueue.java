@@ -3,45 +3,63 @@ package se.hig.aod.lab2;
 public class ArrayQueue<V> implements Queue<V> {
 	
 	private V[] elements;
-	private final int size = 10;
-	private int top;
+	private int size;
+	private int front, back;
+	private final int capacity;
 	
 	@SuppressWarnings("unchecked")
-	public ArrayQueue() {
-		elements = (V[]) new Object[size];
+	public ArrayQueue(int capacity) {
+		elements = (V[]) new Object[capacity];
+		front = 0;
+		back = 0;
+		this.capacity = capacity;
 	}
 
 	@Override
 	public void clear() {
-		for (int i = 0; i < elements.length; i++) {
-			elements[i] = null;
-			if(top != -1)
-				top--;
-		}
+		elements = null;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return back == front ? true : false; // Om slutet av kön är lika stor som början så är den tom.
 	}
 
 	@Override
 	public void enqueue(V v) {
-		// TODO Auto-generated method stub
-		
+		if(isFull()) {
+			return; // behöver felhantering
+		}
+		elements[back] = v;
+		back += 1 % capacity;
+		size++;
 	}
 
 	@Override
 	public V dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		V tmp;
+		if(isEmpty())
+			return null; // behöver felhantering
+		tmp = elements[front];
+		elements[front] = null;
+		front += 1 % capacity;
+		size--;
+		return tmp;
 	}
 
 	@Override
 	public V getFront() {
-		// TODO Auto-generated method stub
-		return null;
+		return elements[front];
 	}
 
+	public boolean isFull() {
+		int difference = back - front;// ex: 9 - 10 
+		if(difference == -1)
+			return true;
+		return false;
+	}
+	
+	public int size() {
+		return size;
+	}
 }

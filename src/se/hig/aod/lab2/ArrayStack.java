@@ -5,6 +5,7 @@ public class ArrayStack<V> implements Stack<V> {
 	private V[] elements;
 	private int top;
 	
+	@SuppressWarnings("unchecked")
 	public ArrayStack(int capacity) {
 		if(capacity <= 0)
 			throw new IllegalArgumentException("Stack needs to be larger than 0.");
