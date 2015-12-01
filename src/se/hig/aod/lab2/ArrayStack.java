@@ -3,10 +3,13 @@ package se.hig.aod.lab2;
 public class ArrayStack<V> implements Stack<V> {
 	
 	private V[] elements;
-	private final int size = 10;
+	private int top;
 	
-	public ArrayStack() {
-		elements = (V[]) new Object[size];
+	public ArrayStack(int capacity) {
+		if(capacity <= 0)
+			throw new IllegalArgumentException("Stack needs to be larger than 0.");
+		elements = (V[]) new Object[capacity];
+		top = -1;
 	}
 
 	@Override
@@ -23,18 +26,31 @@ public class ArrayStack<V> implements Stack<V> {
 
 	@Override
 	public void push(V v) {
-		// TODO Auto-generated method stub
+		if(top == elements.length)
+			return; // behöver felhantering.
+		top++;
+		elements[top] = v;
 	}
 
 	@Override
 	public V pop() {
-		// TODO Auto-generated method stub
-		return null;
+		if(top == -1)
+			return null; // behöver felhantering
+		V tmp = elements[top];
+		elements[top] = null;
+		top--;
+		return tmp;
 	}
 
 	@Override
 	public V top() {
-		// TODO Auto-generated method stub
-		return null;
+		if(top == -1)
+			return null; // behöver felhantering
+		return elements[top];
+	}
+	
+	public boolean isFull() {
+		// TODO a real fucking implementation
+		return false;
 	}
 }

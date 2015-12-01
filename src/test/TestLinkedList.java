@@ -3,7 +3,7 @@ package test;
 import se.hig.aod.lab2.List;
 import se.hig.aod.lab2.LinkedList;;
 
-public class Test {
+public class TestLinkedList {
 	public static void main(String[] args) {
 		 List<String> list = new LinkedList <String>();
 	     list.insertFirst("!");
