@@ -69,4 +69,15 @@ public class ListTest {
 		testList.insertFirst(1);
 		assertEquals(1, testList.getFirst().intValue());
 	}
+	@Test
+	public void insertObjectWhenEmpty() {
+		if (testList.isEmpty()) {
+			try { 
+				testList.insertFirst(4);
+				
+			} catch (Exception e) {
+				
+			}
+		}
+	}
 }
