@@ -26,16 +26,14 @@ public class ArrayStack<V> implements Stack<V> {
 
 	@Override
 	public void push(V v) {
-		if(top == elements.length)
-			return; // behöver felhantering.
 		top++;
 		elements[top] = v;
 	}
 
 	@Override
-	public V pop() {
+	public V pop() throws StackEmptyException{
 		if(top == -1)
-			return null; // behöver felhantering
+			throw new StackEmptyException("Can't remove from empty stack.");
 		V tmp = elements[top];
 		elements[top] = null;
 		top--;
@@ -43,9 +41,9 @@ public class ArrayStack<V> implements Stack<V> {
 	}
 
 	@Override
-	public V top() {
+	public V top() throws StackEmptyException{
 		if(top == -1)
-			return null; // behöver felhantering
+			throw new StackEmptyException("Can't remove from empty stack.");
 		return elements[top];
 	}
 	
