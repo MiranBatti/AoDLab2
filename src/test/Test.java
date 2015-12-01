@@ -5,6 +5,21 @@ import se.hig.aod.lab2.LinkedList;;
 
 public class Test {
 	public static void main(String[] args) {
+		 List<String> list = new LinkedList <String>();
+	     list.insertFirst("!");
+	     list.insertFirst("j");
+	     list.insertFirst("e");
+	     list.insertFirst("h");
+	     list.printList();
+	      
+	     System.out.println(list.getFirst() + " : första elementet i listan.");
+	     System.out.println(list.getLast() + " : sista elementet i listan.");
+
+	     list.insertLast("?");
+
+	     list.removeLast();
+	     list.printList();
+	      /*
 		List<Integer> testList = new LinkedList<Integer>();
 		System.out.println(testList.numberOfElements());
 		testList.insertFirst(1);
@@ -16,7 +31,7 @@ public class Test {
 		System.out.println(testList.getLast() + " last");
 		testList.clear();
 		testList.printList();
-		testList.reversePrintList();
+		testList.reversePrintList();*/
 		
 	}
 }
