@@ -53,6 +53,12 @@ public class ListTest {
 	 */
 	@Test
 	public void doesNotContainElementTest() {
-		assertFalse(testList.contains(7));
+		try {
+			testList.contains(6);
+			fail("Expected: ListIsEmptyException!");
+		} catch (ListIsEmptyException e) {
+			assertNotNull("Expected: ListIsEmptyException!");
+		}
 	}
+
 }

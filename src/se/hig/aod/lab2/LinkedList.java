@@ -23,10 +23,7 @@ public class LinkedList<T> implements List<T> {
 	 */
 	@Override
 	public void clear() {
-		//medan listan inte är tom; ta bort första elementet.
-		while(!isEmpty()) {
-			removeFirst();
-		}
+		head = null;
 	}
 	/**
 	 * Returnerar antal element i listan.

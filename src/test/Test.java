@@ -14,8 +14,7 @@ public class Test {
 		System.out.println(tmp);
 		System.out.println(testList.numberOfElements() + " : size");
 		System.out.println(testList.getLast() + " last");
-		testList.removeFirst();
-		testList.removeLast();
+		testList.clear();
 		testList.printList();
 		testList.reversePrintList();
 		
