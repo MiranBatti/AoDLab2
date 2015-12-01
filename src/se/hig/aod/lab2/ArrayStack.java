@@ -14,8 +14,11 @@ public class ArrayStack<V> implements Stack<V> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < elements.length; i++) {
+			elements[i] = null;
+			if(top != -1)
+				top--;
+		}
 	}
 
 	@Override
@@ -25,17 +28,18 @@ public class ArrayStack<V> implements Stack<V> {
 
 	@Override
 	public void push(V v) {
+		top++;				
 		elements[top] = v;
-		top++;		
 	}
 
 	@Override
 	public V pop() throws StackEmptyException{
 		if(top == -1)
 			throw new StackEmptyException("Can't remove from empty stack.");
-//		elements[top] = null;
+		V tmp = elements[top];
+		elements[top] = null;
 		top--;
-		return elements[top];
+		return tmp;
 	}
 
 	@Override

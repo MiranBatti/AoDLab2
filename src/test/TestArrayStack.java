@@ -7,6 +7,7 @@ public class TestArrayStack {
 	public static void main(String[] args) {
 		Stack<Integer> s = new ArrayStack<Integer>(3);
 		s.push(3);
-		System.out.println(s.top());
+		s.pop();
+		s.clear();
 	}
 }
