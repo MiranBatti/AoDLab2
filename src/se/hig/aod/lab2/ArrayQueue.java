@@ -4,15 +4,20 @@ public class ArrayQueue<V> implements Queue<V> {
 	
 	private V[] elements;
 	private final int size = 10;
+	private int top;
 	
+	@SuppressWarnings("unchecked")
 	public ArrayQueue() {
 		elements = (V[]) new Object[size];
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < elements.length; i++) {
+			elements[i] = null;
+			if(top != -1)
+				top--;
+		}
 	}
 
 	@Override

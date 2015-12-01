@@ -15,13 +15,13 @@ import org.junit.Test;
  */
 public class ArrayStackTest
 {
-	Stack<Character> testStack;
+	ArrayStack<Character> testStack;
 	char[] fixture = {'a', 'b', 'c', 'd'};
 
 	@Before
 	public void setUp () throws Exception
 	{
-		testStack = new ArrayStack<Character>(5);
+		testStack = new ArrayStack<Character>(4);
 	}
 
 	@After
@@ -111,5 +111,24 @@ public class ArrayStackTest
 		}
 		testStack.clear();
 		assertEquals(true, testStack.isEmpty());
+	}
+	
+	/**
+	 * Testa om listan är full då den är full.
+	 */
+	@Test
+	public void testIsFull() {
+		for (int i = 0; i < fixture.length; i++) {
+			testStack.push(fixture[i]);
+		}
+		assertTrue(testStack.isFull());
+	}
+	
+	/**
+	 * Testa om listan är full då den är tom.
+	 */
+	@Test
+	public void testIsNotFull() {
+		assertFalse(testStack.isFull());
 	}
 }
