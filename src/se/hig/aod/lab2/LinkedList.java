@@ -1,7 +1,7 @@
 package se.hig.aod.lab2;
 
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> implements ExtendList<T>{
 
 	private ListNode<T> head;
 //	private int size;
@@ -86,8 +86,9 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public T removeLast() throws ListIsEmptyException{
-		ListNode<T> last = null;;
+		ListNode<T> previous = null;;
 		ListNode<T> current = head;
+		T rtrn = null;
 		
 		if(isEmpty()) {
 			throw new ListIsEmptyException("List is empty.");
@@ -96,13 +97,14 @@ public class LinkedList<T> implements List<T> {
 			head = null;
 		else {
 			while(current.next != null) {
-				last = current;
+				previous = current;
 				current = current.next;
 			}
-			last.next = null;
+			rtrn = current.element;
+			previous.next = null;
 			current = null;
 		}
-		return null;
+		return rtrn;
 	}
 
 	@Override
@@ -186,6 +188,105 @@ public class LinkedList<T> implements List<T> {
 				printR(node.next);
 			System.out.println(node.element);	
 		}
+	}
+
+	@Override
+	public void insert(T t, int index) {
+		ListNode<T> current = head;
+		ListNode<T> next = current.next;
+		ListNode<T> newNode;
+		
+		if(isEmpty()){ // det går endas lägga element först i listan om den är tom.
+			head = new ListNode<T>(t, null); return;
+		}
+		
+		if(index == 0) {
+			newNode = new ListNode<T>(t, head);
+			head = newNode;
+			return;
+		}
+		
+		for (int i = 0; i < index - 1; i++) {
+			current = current.next;
+			next = current.next;
+		}
+		newNode = new ListNode<T>(t, next);
+		current.next = newNode;
+	}
+	@Override
+	public T remove(T t) throws ListIsEmptyException{
+		ListNode<T> current = head;
+		ListNode<T> previous = null;
+		
+		if(isEmpty()) // första fallet är om listan är tom.
+			throw new ListIsEmptyException("List is empty");
+		
+		if(head.equals(t)) { // andra fallet är om det första elementet ska bort.
+			current = head;
+			head = head.next; // ersätter färsta elementet med nästa.
+			return current.element;
+		}
+		//i det tredje fallet måste vi iterera genom listan tills vi hittar elementet.
+		while(current != null && !current.element.equals(t)) {
+			previous = current;
+			current = current.next;
+		}
+		previous.next = null;
+		current = null;
+		return null;
+	}
+	@Override
+	public T get(int index) throws ListIsEmptyException{
+		
+		if(isEmpty())
+			throw new ListIsEmptyException("List is empty");
+		
+		if(index < 0 || index >= size())
+			throw new IllegalArgumentException("Index value not valid.");
+		
+		ListNode<T> current = head;
+		for (int i = 0; i < index; i++) {
+			current = current.next;
+		}
+		return current.element;
+	}
+	@Override
+	public T remove(int index) throws ListIsEmptyException{
+		
+		if(isEmpty())
+			throw new ListIsEmptyException("List is empty");
+		
+		if(index < 0 || index >= size()) // om indexet är för litet eller större en listan blir det fel. 
+			throw new IllegalArgumentException("Index value not valid.");
+		
+		T removedElement = null;		
+		
+		if(index == 0) {
+			removedElement = head.element;
+			head = head.next;
+			return removedElement;
+		}
+		
+		ListNode<T> current = head;
+		
+		for (int i = 0; i < index - 1; i++) {
+			current = current.next;
+		}
+		
+		removedElement = current.next.element;
+		current.next = current.next.next;
+		
+		return removedElement;
+	}
+	
+	private int size() {
+		int size = 0;
+		ListNode<T> current = head;
+		while(current != null){
+			size++;
+			current = current.next;
+		}
+		return size;
 	}
 	
 }

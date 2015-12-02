@@ -19,6 +19,7 @@ public class ArrayQueue<V> implements Queue<V> {
 	@Override
 	public void clear() {
 		elements = null;
+		size = 0;
 		System.out.println("Listan har tömts.");
 	}
 

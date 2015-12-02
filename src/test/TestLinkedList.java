@@ -1,11 +1,11 @@
 package test;
 
-import se.hig.aod.lab2.List;
+import se.hig.aod.lab2.ExtendList;
 import se.hig.aod.lab2.LinkedList;;
 
 public class TestLinkedList {
 	public static void main(String[] args) {
-		 List<String> list = new LinkedList <String>();
+		 ExtendList<String> list = new LinkedList <String>();
 	     list.insertFirst("!");
 	     list.insertFirst("j");
 	     list.insertFirst("e");
@@ -15,15 +15,18 @@ public class TestLinkedList {
 	     System.out.println(list.getFirst() + " : första elementet i listan.");
 	     System.out.println(list.getLast() + " : sista elementet i listan.");
 
-	     list.insertLast("?");
+//	     list.insertLast("?");
+	     list.insert("?", 0);
 
-	     list.removeLast();
-	     list.printList();
+//	     System.out.println(list.removeLast() + " : sista elementet som togs bort.");
+	     System.out.println(list.remove(0) + " : index removed");
+	     System.out.println(list.get(2) + " : get");
+	     list.reversePrintList();
 	     
 	     // för att jämföra beteendet mellan våran lista och javas lista.
 	     java.util.LinkedList<Integer> z = new java.util.LinkedList<>();
 	     z.clear();
-	      /*
+	     /*
 		List<Integer> testList = new LinkedList<Integer>();
 		System.out.println(testList.numberOfElements());
 		testList.insertFirst(1);
