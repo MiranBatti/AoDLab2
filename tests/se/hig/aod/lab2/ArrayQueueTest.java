@@ -108,5 +108,33 @@ public class ArrayQueueTest {
 		assertEquals(true, testQueue.isEmpty());
 	}
 
+	/**
+	 * Testar om kön är full då den är full.
+	 */
+	@Test
+	public void testIsFullWhenFull() {
+		for (int i = 0; i < fixture.length; i++) {
+			testQueue.enqueue(fixture[i]);
+		}
+		assertTrue(testQueue.isFull());
+	}
 
+	/**
+	 * Testar om kön är full då den är tom.
+	 */
+	@Test
+	public void testIsFullWhenEmpty() {
+		assertFalse(testQueue.isFull());
+	}
+	
+	/**
+	 * Testar köns storlek.
+	 */
+	@Test
+	public void testSize() {
+		for (int i = 0; i < fixture.length; i++) {
+			testQueue.enqueue(fixture[i]);			
+		}
+		assertEquals(4, testQueue.size());
+	}
 }

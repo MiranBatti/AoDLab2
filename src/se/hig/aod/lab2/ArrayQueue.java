@@ -1,5 +1,14 @@
 package se.hig.aod.lab2;
-
+/**
+ * Queue representing FIFO queue of objects.
+ * 
+ * @author Miran Batti
+ * @author Fredrik Lindorf
+ * 
+ * @version 2015-12-01
+ *
+ * @param <V>
+ */
 public class ArrayQueue<V> implements Queue<V> {
 	
 	private V[] elements;
@@ -16,27 +25,32 @@ public class ArrayQueue<V> implements Queue<V> {
 		this.capacity = capacity;
 	}
 
+	/** 
+     * Removes all elements from this queue and writes 
+     * a message on {@link System}.out).
+     */
 	@Override
 	public void clear() {
 		elements = null;
 		size = 0;
-		System.out.println("Listan har tömts.");
+		System.out.println("Köen har tömts.");
 	}
 
+	/**
+	 * Checks if this queue is empty.
+	 * 
+	 * @return true if queue is empty, false otherwise.
+	 */
 	@Override
 	public boolean isEmpty() {
-		/*
-		boolean tmp = false;
-		for (int i = 0; i < elements.length; i++) {
-			if(elements[i] == null)
-				tmp = false;
-			else
-				tmp = true;
-		}*/
 		return size == 0;
-//		return (back == front) ? true : false; // Om slutet av kön är lika stor som början så är den tom.
 	}
 
+	/**
+	 * Add an element at the last position in this queue.
+	 * 
+	 * @param object added to this queue.
+	 */
 	@Override
 	public void enqueue(V v) throws QueueFullException{
 		if(isFull()) {
@@ -47,6 +61,12 @@ public class ArrayQueue<V> implements Queue<V> {
 		size++;
 	}
 
+	/**
+	 * Removes the first element from this queue. Will throw
+	 * {@link QueueEmptyException} if this queue is empty.
+	 * 
+	 * @return the first element.
+	 */
 	@Override
 	public V dequeue() throws QueueEmptyException{
 		V tmp;
@@ -59,6 +79,12 @@ public class ArrayQueue<V> implements Queue<V> {
 		return tmp;
 	}
 
+	/**
+	 * Returns the first element in this queue, without removing it. Will throw
+	 * {@link QueueEmptyException} if this queue is empty.
+	 * 
+	 * @return the first element.
+	 */
 	@Override
 	public V getFront() throws QueueEmptyException{
 		if(isEmpty())
@@ -66,20 +92,19 @@ public class ArrayQueue<V> implements Queue<V> {
 		return elements[front];
 	}
 
+	/**
+	 * Check if this queue is full.
+	 * @return true if list full, otherwise false
+	 */
 	public boolean isFull() {
-		/*
-		int difference = back - front;// ex: 9 - 10 
-		if(difference == -1 || difference == (capacity - 1))
-			return true;
-		return false;*/
 		return(this.size == this.capacity);		
 	}
 	
+	/**
+	 * Returns the size of this queue.
+	 * @return the size of this queue
+	 */
 	public int size() {
-		/*
-		if(back > front)
-            return back - front;
-        return capacity - front + back;*/
 		return size;
 	}
 }

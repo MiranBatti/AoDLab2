@@ -29,7 +29,7 @@ public interface ExtendList<T> extends List<T>{
 	 */
 	public T remove(int index);
 	/**
-	 * Returns element in specified index.
+	 * Returns element from specified index.
 	 * @param index
 	 * @return element in index
 	 */
