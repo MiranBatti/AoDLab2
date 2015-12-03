@@ -83,7 +83,7 @@ public class ArrayStack<V> implements Stack<V> {
 	@Override
 	public V top() throws StackEmptyException{
 		if(top == -1)
-			throw new StackEmptyException("Can't remove from empty stack.");
+			throw new StackEmptyException("Stack is empty.");
 		return elements[top];
 	}
 	

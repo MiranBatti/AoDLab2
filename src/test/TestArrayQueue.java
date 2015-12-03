@@ -9,7 +9,7 @@ public class TestArrayQueue {
 		System.out.println(testQueue.isFull() + " : är full");
 		testQueue.enqueue(2);
 		testQueue.enqueue(4);
-		System.out.println(testQueue.dequeue() + " : dequed");
+		System.out.println(testQueue.dequeue() + " : dequeued");
 		System.out.println(testQueue.size() + " : size");
 		System.out.println(testQueue.getFront());
 		System.out.println(testQueue.isEmpty() + " : är tom");

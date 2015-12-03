@@ -14,9 +14,6 @@ public class LinkedList<T> implements ExtendList<T>{
 
 	private ListNode<T> head;
 	
-	public LinkedList() {
-	}
-	
 	/**
 	 * Check if list is empty.
 	 * @return true if empty, otherwise false
