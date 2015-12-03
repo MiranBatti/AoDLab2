@@ -174,6 +174,12 @@ public class LinkedList<T> implements ExtendList<T>{
 		ListNode<T> current = head;
 		if(isEmpty())
 			throw new ListIsEmptyException("List is empty.");
+		T tmp = findElementRecursive(current, t);
+		if(tmp == null)
+			return false;
+		if(tmp.equals(t))
+			return true;
+		/*
 		if(!isEmpty() && getFirst().equals(t))
 			return true;
 		else
@@ -183,7 +189,7 @@ public class LinkedList<T> implements ExtendList<T>{
 					return true;
 				else
 					return false;
-			}
+			}*/
 		return false;
 	}
 
@@ -361,5 +367,19 @@ public class LinkedList<T> implements ExtendList<T>{
 		
 		return removedElement;
 	}
-		
+	
+	/**
+	 * Koden lades till efter rapporten var färdig skriven. Används till svaret i disk
+	 * @param node
+	 * @param t
+	 * @return
+	 */
+		private T findElementRecursive(ListNode<T> node, T t) {
+				if(t.equals(node.element))
+					return node.element;
+				
+				if (node.element != null && node.next != null) 
+					return findElementRecursive(node.next, t);		
+				else return null;
+		}
 }
